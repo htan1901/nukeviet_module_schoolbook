@@ -8,7 +8,7 @@
  * @Createdate Mon, 3 Wed 2022 21:00:00 GMT
  */
 
-if ( ! defined( 'NV_IS_MOD_SCHOOLBOOK' ) ) die( 'Stop!!!' );
+if (!defined('NV_IS_MOD_SCHOOLBOOK')) die('Stop!!!');
 
 
 //Chuyển đổi tpl sang xtemplate
@@ -23,7 +23,7 @@ if ($nv_Request->isset_request('login', 'post')) {
     $xtpl->assign('USERNAME', $input_username);
     $xtpl->assign('PASSWORD', $input_password);
     //Kiểm tra thông tin người trong csdl
-    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . "_account WHERE username = '".trim($input_username)."' AND password = '".trim($input_password)."'";
+    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . "_taikhoan WHERE TenDangNhap = '".trim($input_username)."' AND MatKhau = '".trim($input_password)."'";
 
     $_row = $db->query($sql)->fetchAll();
     if(empty($_row[0])){

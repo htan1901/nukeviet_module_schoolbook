@@ -26,11 +26,11 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('MH005', 'Thể dục'),
 	('MH006', 'Tiếng Anh'),
 	('MH007', 'Tin học'),
-	('MH008', 'Ngữ văn')
+	('MH008', 'Ngữ văn');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_truong (MaTruong, TenTruong) VALUES
-	('TR001', 'Trường trung học phổ thông Võ Thị Sáu'),
+	('TR001', 'Trường trung học phổ thông Võ Thị Sáu');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien (MaGV, HoTen, SDT, MaTruong) VALUES
@@ -43,7 +43,7 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('GV007', 'Đây Vít', '0123456789', 'TR001'),
 	('GV008', 'Đờ Ghia', '0456789012', 'TR001'),
 	('GV009', 'Lê Ô Neo', '0123456789', 'TR001'),
-	('GV010', 'Mẹc Xi', '0456789012', 'TR001')
+	('GV010', 'Mẹc Xi', '0456789012', 'TR001');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_lop (MaLop, TenLop, Khoi, NamHoc, MaGVCN) VALUES
@@ -52,14 +52,14 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('L003', '12A2', 12, '2022 - 2023', 'GV004'),
 	('L004', '10A1', 10, '2021 - 2022', 'GV005'),
 	('L005', '11A1', 11, '2021 - 2022', 'GV002'),
-	('L006', '12A1', 12, '2021 - 2022', 'GV008'),
+	('L006', '12A1', 12, '2021 - 2022', 'GV008');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_kehoachbaiday (MaLop, MaMH, NgayDay, TietBD, NhanXet, XepLoai, TrangThai, MaGV) VALUES
-	('L001', 'MH001', '2022-11-12', 1, 'Lớp học tốt', 'A', 0, 'GV001'),
-	('L001', 'MH002', '2022-11-12', 2, 'Lớp học tốt nhưng tệ', 'B', 1, 'GV003'),
-	('L001', 'MH003', '2022-11-12', 3, 'Lớp không học, quậy', 'C', 0, 'GV004'),
-	('L001', 'MH004', '2022-11-12', 4, 'Lớp học ổn', 'A', 1, 'GV005'),
+	('L001', 'MH001', 2022-11-12, 1, 'Lớp học tốt', 'A', 0, 'GV001'),
+	('L001', 'MH002', 2022-11-12, 2, 'Lớp học tốt nhưng tệ', 'B', 1, 'GV003'),
+	('L001', 'MH003', 2022-11-12, 3, 'Lớp không học, quậy', 'C', 0, 'GV004'),
+	('L001', 'MH004', 2022-11-12, 4, 'Lớp học ổn', 'A', 1, 'GV005');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_taikhoan (TenDangNhap, MatKhau, MaGV, VaiTro) VALUES
@@ -72,5 +72,5 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('vitd', 'vitd', 'NV007', 1),
 	('ghiad', 'ghiad', 'NV008', 1),
 	('neolo', 'neolo', 'NV009', 1),
-	('xim', 'xim', 'NV010', 1),
+	('xim', 'xim', 'NV010', 1);
 ");
