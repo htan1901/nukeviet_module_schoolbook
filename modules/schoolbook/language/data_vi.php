@@ -18,25 +18,59 @@ if (! defined('NV_ADMIN')) {
  * 	- Accept global var: $db, $db_config, $global_config
  */
 
-$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_account (name, username, password) VALUES
-('Phương', 'user1', '123'),
-('Kỳ', 'user2', '123'),
-('Khang', 'user3', '123');
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_monhoc (MaMH, TenMH) VALUES
+	('MH001', 'Vật lý'),
+	('MH002', 'Toán học'),
+	('MH003', 'Hóa học'),
+	('MH004', 'Lịch sử'),
+	('MH005', 'Thể dục'),
+	('MH006', 'Tiếng Anh'),
+	('MH007', 'Tin học'),
+	('MH008', 'Ngữ văn')
 ");
 
-$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_question (answer, question, index_keyword, index_num) VALUES
-    ('NANGGAT', 'Nắng gì làm mình bị rát da ? ', 'N', 1),
-	('CONUT', 'Người con nhỏ nhất trong gia đình được gọi là gì ?', 'U', 2),
-	('CONKIENTHO', 'Con kiến nào có nhiệm vụ xây dựng tổ kiến ?', 'K', 3),
-	('BENSONG', 'Nơi nào 1 bên là nước 1 bên là bờ ?', 'E', 4),
-	('EVENT', 'Từ khóa nào dùng để nói các sự kiện trong lập trình ?', 'V', 5),
-	('MYVIBER', 'Phần mềm nào dùng để nghe gọi và được viết thành 1 module cho Nukeviet ?', 'I', 6),
-	('VIENSOI', 'Viên gì vừa trắng vừa tròn hình thành từ núi, lớn lên ở biển ?', 'E', 7),
-	('TAMTIEN', 'Tắm như thế nào là sướng nhất ?', 'T', 8);
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_truong (MaTruong, TenTruong) VALUES
+	('TR001', 'Trường trung học phổ thông Võ Thị Sáu'),
 ");
 
-$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_ranking (id ,id_user, username, point) VALUES
-(1, 1, 'user1', 26),
-(2, 2, 'user2', 53),
-(3, 3, 'user3', 25);
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien (MaGV, HoTen, SDT, MaTruong) VALUES
+	('GV001', 'Trần Lê Huỳnh Tú', '0369966969', 'TR001'),
+	('GV002', 'Trần Lê Tài', '0389988998', 'TR001'),
+	('GV003', 'Nguyễn Đình Trung', '0456789012', 'TR001'),
+	('GV004', 'Phan Đình Tùng', '0123456789', 'TR001'),
+	('GV005', 'Lê Ô Nát Đô', '0456789012', 'TR001'),
+	('GV006', 'Đờ Vanh Xi', '0123456789', 'TR001'),
+	('GV007', 'Đây Vít', '0123456789', 'TR001'),
+	('GV008', 'Đờ Ghia', '0456789012', 'TR001'),
+	('GV009', 'Lê Ô Neo', '0123456789', 'TR001'),
+	('GV010', 'Mẹc Xi', '0456789012', 'TR001')
+");
+
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_lop (MaLop, TenLop, Khoi, NamHoc, MaGVCN) VALUES
+	('L001', '10A1', 10, '2022 - 2023', 'GV001'),
+	('L002', '11A1', 11, '2022 - 2023', 'GV007'),
+	('L003', '12A2', 12, '2022 - 2023', 'GV004'),
+	('L004', '10A1', 10, '2021 - 2022', 'GV005'),
+	('L005', '11A1', 11, '2021 - 2022', 'GV002'),
+	('L006', '12A1', 12, '2021 - 2022', 'GV008'),
+");
+
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_kehoachbaiday (MaLop, MaMH, NgayDay, TietBD, NhanXet, XepLoai, TrangThai, MaGV) VALUES
+	('L001', 'MH001', '2022-11-12', 1, 'Lớp học tốt', 'A', 0, 'GV001'),
+	('L001', 'MH002', '2022-11-12', 2, 'Lớp học tốt nhưng tệ', 'B', 1, 'GV003'),
+	('L001', 'MH003', '2022-11-12', 3, 'Lớp không học, quậy', 'C', 0, 'GV004'),
+	('L001', 'MH004', '2022-11-12', 4, 'Lớp học ổn', 'A', 1, 'GV005'),
+");
+
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_taikhoan (TenDangNhap, MatKhau, MaGV, VaiTro) VALUES
+	('tutlh', 'tutlh', 'NV001', 0),
+	('taitl', 'taitl', 'NV002', 0),
+	('trungnd', 'trungnd', 'NV003', 1),
+	('tungpd', 'tungpd', 'NV004', 1),
+	('dolon', 'dolon', 'NV005', 1),
+	('xidv', 'xidv', 'NV006', 1),
+	('vitd', 'vitd', 'NV007', 1),
+	('ghiad', 'ghiad', 'NV008', 1),
+	('neolo', 'neolo', 'NV009', 1),
+	('xim', 'xim', 'NV010', 1),
 ");

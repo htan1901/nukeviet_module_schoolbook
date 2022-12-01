@@ -30,7 +30,7 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_truong (
   MaTruong char(8) NOT NULL,
-  TenTruong varchar(50) character set utf8 NOT NULL,
+  TenTruong varchar(500) character set utf8 NOT NULL,
   PRIMARY KEY (MaTruong)
 ) ENGINE=MyISAM";
 
@@ -38,28 +38,10 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
   MaGV varchar(10) NOT NULL,
   HoTen varchar(50) character set utf8 NOT NULL,
   SDT char(10) NOT NULL,
-  DiaChi varchar(70) character set utf8 NULL,
-  Email varchar(50) character NULL,
   MaTruong char(8) NOT NULL,
   FOREIGN KEY (MaTruong) REFERENCES " . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_truong(MaTruong),
   PRIMARY KEY (id)
 ) ENGINE=MyISAM";
-
-$sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_lop (
-  MaLop varchar(10) NOT NULL,
-  TenLop varchar(50) character set utf8 NULL,
-  Khoi tinyint NULL,
-  NamHoc char(11) NULL,
-  MaGVCN varchar(10) NULL,
-  FOREIGN KEY (MaGVCN) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(MaGV),
-  PRIMARY KEY (MaLop)
-) ENGINE=MyISAM";
-
-$sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_monhoc (
-    MaMH varchar(10) NOT NULL,
-    TenMH varchar(50) character set utf8 NOT NULL,
-    PRIMARY KEY (MaMH)
-  ) ENGINE=MyISAM";
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_kehoachbaiday (
     MaLop varchar(10) NOT NULL,
@@ -76,3 +58,11 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
     PRIMARY KEY (MaLop, MaMH)
   ) ENGINE=MyISAM";
  
+$sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_taikhoan (
+    TenDangNhap varchar(50) NOT NULL,
+    MatKhau varchar(100) NOT NULL,
+    MaGV varchar(10) NOT NULL,
+    VaiTro tinyint NOT NULL,
+    FOREIGN KEY (MaGV) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(MaGV),
+    PRIMARY KEY (TenDangNhap)
+  ) ENGINE=MyISAM";
