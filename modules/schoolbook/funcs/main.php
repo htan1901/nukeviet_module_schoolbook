@@ -26,7 +26,7 @@ if ($nv_Request->isset_request('login', 'post')) {
     $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . "_taikhoan WHERE TenDangNhap = '".trim($input_username)."' AND MatKhau = '".trim($input_password)."'";
 
     $_row = $db->query($sql)->fetchAll();
-    if(empty($_row[0])){
+    if(empty($_row[0])) {
         $xtpl->assign('ERROR', $lang_module['login_fail']);
         $xtpl->parse('main.error');
     }
@@ -37,9 +37,9 @@ if ($nv_Request->isset_request('login', 'post')) {
         {
             session_start();
         }
-        $_SESSION["user_id"] = $_row[0]['id'].'';
-        $_SESSION["username"] = $_row[0]['username'].'';
-        nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=rule');
+        $_SESSION["user_id"] = $_row[0]['TenDangNhap'].'';
+        $_SESSION["username"] = $_row[0]['TenDangNhap'].'';
+        nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=teacher');
     }
 }
 
@@ -49,8 +49,7 @@ $ifram = $nv_Request->get_int( 'ifram', 'get', 0 );
 $contents = $xtpl->text( 'main' );
 //Khởi tạo giao diện
 include NV_ROOTDIR . '/includes/header.php';
-if( $ifram )
-{
+if( $ifram ) {
     echo nv_site_theme( $contents, 0 );
 }
 else
