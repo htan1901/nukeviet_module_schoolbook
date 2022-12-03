@@ -15,38 +15,39 @@ if (!defined('NV_IS_MOD_SCHOOLBOOK')) die('Stop!!!');
 $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file );
 //Truyền tham số sang view
 $xtpl->assign( 'LANG', $lang_module );
-$xtpl->assign( 'LINK_REGISTER', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=register' );
 //Kiểm tra trạng thái khi người dùng chọn login
 if ($nv_Request->isset_request('login', 'post')) {
     $input_username = $nv_Request->get_title('input_username', 'post', true);
     $input_password = $nv_Request->get_title('input_password', 'post', true);
     $xtpl->assign('USERNAME', $input_username);
     $xtpl->assign('PASSWORD', $input_password);
+
     //Kiểm tra thông tin người trong csdl
-    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . "_taikhoan WHERE TenDangNhap = '".trim($input_username)."' AND MatKhau = '".trim($input_password)."'";
+    $sql = 'SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . "_taikhoan WHERE ten_dang_nhap = '".trim($input_username)."' AND mat_khau = '".trim($input_password)."';";
 
     $_row = $db->query($sql)->fetchAll();
-    if(empty($_row[0])) {
+    if (empty($_row[0])) {
         $xtpl->assign('ERROR', $lang_module['login_fail']);
         $xtpl->parse('main.error');
-    }
-    else{
-        //Login success
-        //Save cookie user id
-        if(session_id() == '')
-        {
+    } else {
+        // login thanh cong
+        // luu thong tin dang nhap va thoi gian vao session
+        if (session_id() == '') {
             session_start();
         }
-        $_SESSION["user_id"] = $_row[0]['TenDangNhap'].'';
-        $_SESSION["username"] = $_row[0]['TenDangNhap'].'';
+        $_SESSION['id'] = $_row[0]['id'].'';
+        $_SESSION['ten_dang_nhap'] = $_row[0]['ten_dang_nhap'].'';
+        $_SESSION['thoi_gian'] = '' . date("H:i d/m/Y");
+
+        // chuyen huong sang trang giao vien
         nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=teacher');
     }
 }
 
 //Chuyển qua khối main
-$xtpl->parse( 'main' );
-$ifram = $nv_Request->get_int( 'ifram', 'get', 0 );
-$contents = $xtpl->text( 'main' );
+$xtpl->parse('main');
+$ifram = $nv_Request->get_int('ifram', 'get', 0);
+$contents = $xtpl->text('main');
 //Khởi tạo giao diện
 include NV_ROOTDIR . '/includes/header.php';
 if( $ifram ) {

@@ -33,8 +33,7 @@ if ($nv_Request->isset_request('login', 'post')) {
     else{
         //Login success
         //Save cookie user id
-        if(session_id() == '')
-        {
+        if(session_id() == '') {
             session_start();
         }
         $_SESSION["user_id"] = $_row[0]['id'].'';
@@ -44,9 +43,9 @@ if ($nv_Request->isset_request('login', 'post')) {
 }
 
 //Chuyển qua khối main
-$xtpl->parse( 'main' );
-$ifram = $nv_Request->get_int( 'ifram', 'get', 0 );
-$contents = $xtpl->text( 'main' );
+$xtpl->parse('main');
+$ifram = $nv_Request->get_int('ifram', 'get', 0);
+$contents = $xtpl->text('main');
 //Khởi tạo giao diện
 include NV_ROOTDIR . '/includes/header.php';
 if( $ifram )
