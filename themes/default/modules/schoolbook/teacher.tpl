@@ -46,7 +46,7 @@
 			<div style="margin: 0 10px 0 10px;">
 				<!-- BEGIN: teaching_loop -->
 				<form action="{URL_CLASS}" method="get" style="display: inline; margin: 0 10px 0 10px;">
-					<input type="hidden" name="khoa" value="{teaching_row.nam_hoc}">
+					<input type="hidden" name="ma_lop" value="{teaching_row.ma_lop}">
 					<input type="submit" name="lop" value="{teaching_row.ten_lop}" class="button teaching-class-button">
 				</form>
 				<!-- END: teaching_loop -->
@@ -60,7 +60,7 @@
 			<div style="margin: 0 10px 0 10px;">
 				<!-- BEGIN: manage_loop -->
 				<form action="{URL_CLASS}" method="get" style="display: inline; margin: 0 10px 0 10px;">
-					<input type="hidden" name="khoa" value="{manage_row.nam_hoc}">
+					<input type="hidden" name="ma_lop" value="{manage_row.ma_lop}">
 					<input type="submit" name="lop" value="{manage_row.ten_lop}" class="button">
 				</form>
 				<!-- END: manage_loop -->

@@ -66,7 +66,7 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
     FOREIGN KEY (ma_lop) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_lop(ma_lop),
     FOREIGN KEY (ma_mon_hoc) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_monhoc(ma_mon_hoc),
     FOREIGN KEY (ma_giao_vien) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(ma_giao_vien),
-    PRIMARY KEY (ma_lop, ma_mon_hoc)
+    PRIMARY KEY (ma_lop, ma_mon_hoc, ngay_day)
   ) ENGINE=MyISAM";
  
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_taikhoan (

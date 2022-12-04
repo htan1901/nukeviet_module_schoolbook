@@ -59,7 +59,11 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('L001', 'MH001', '2022-11-12', 1, 'Bài 1', 'Lớp học tốt', 9, 0, 'GV001'),
 	('L001', 'MH002', '2022-11-12', 2, 'Bài 2', 'Lớp học tốt nhưng tệ', 6, 1, 'GV003'),
 	('L001', 'MH003', '2022-11-12', 3, 'Bài 6', 'Lớp không học, quậy', 3, 0, 'GV004'),
-	('L001', 'MH004', '2022-11-12', 4, 'Bài 4', 'Lớp học ổn', 8, 1, 'GV005');
+	('L001', 'MH004', '2022-11-12', 4, 'Bài 4', 'Lớp học ổn', 8, 1, 'GV005'),
+	('L001', 'MH001', '2022-11-20', 1, 'Bài 2', 'Lớp học tốt', 9, 1, 'GV005'),
+	('L001', 'MH002', '2022-11-20', 2, 'Bài 3', 'Lớp học tốt nhưng tệ', 6, 1, 'GV003'),
+	('L001', 'MH003', '2022-11-20', 3, 'Bài 7', 'Lớp không học, quậy', 3, 0, 'GV004'),
+	('L001', 'MH004', '2022-11-20', 4, 'Bài 5', 'Lớp học ổn', 8, 1, 'GV005');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_taikhoan (ten_dang_nhap, mat_khau, ma_giao_vien, vai_tro) VALUES

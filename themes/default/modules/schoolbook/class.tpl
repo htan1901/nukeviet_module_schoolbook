@@ -1,3 +1,6 @@
+<script src="{$NV_BASE_SITEURL}{$NV_ASSETS_DIR}/js/schoolbook.js">
+
+</script>
 <!-- BEGIN: main -->
 <div class="table-responsive" style="margin-bottom: 10%;background-color: azure;">
 	<div id="top">
@@ -89,7 +92,7 @@
 
 		</style>
 
-		<table>
+		<table style="width: 50%;">
 			<tr>
 				<td>
 					<input id="btn_edit" type="button" value="edit">
@@ -107,25 +110,26 @@
 		</table>
 
 		<div>
-			<table id="so_dau_bai"
-				style="text-align: center;width: 100%;border: 2px solid black; margin: 10px 0 0 10px;">
+			<table id="so_dau_bai" style="text-align: center;width: 100%;border: 2px solid black; margin: 10px 0 0 10px;">
 				<tr class="table_row">
-					<th class="table_col">Tên môn học</th>
-					<th class="table_col">Tiết</th>
 					<th class="table_col">Ngày dạy</th>
+					<th class="table_col">Tiết</th>
+					<th class="table_col">Tên môn học</th>
+					<th class="table_col">Bài học</th>
 					<th class="table_col">Nhận xét</th>
 					<th class="table_col">Xếp loại</i></th>
 					<th class="table_col">Trạng Thái</th>
 				</tr>
 				<!-- BEGIN: subject_loop-->
-				<tr class="table_row">
-					<td class="table_col">{subject.ten_mon_hoc}</td>
-					<td class="table_col">{subject.tiet_bat_dau}</td>
+				<tr class="table_row" id="{ROW_NUM}">
 					<td class="table_col">{subject.ngay_day}</td>
+					<td class="table_col">{subject.tiet_bat_dau}</td>
+					<td class="table_col">{subject.ten_mon_hoc}</td>
+					<td class="table_col">{subject.bai_hoc}</td>
 					<td class="table_col">{subject.nhan_xet}</td>
 					<td class="table_col">{subject.xep_loai}</td>
 					<td class="table_col">
-						<input type="checkbox" name="trang_thai">
+						<input type="checkbox" name="trang_thai" {check}>
 					</td>
 				</tr>
 				<!-- END: subject_loop-->
@@ -144,7 +148,8 @@
 			border: 1px solid #ddd;
 			padding: 8px;
 		}
-		#so_dau_bai tr{
+
+		#so_dau_bai tr {
 			text-align: left;
 		}
 
@@ -161,4 +166,6 @@
 		}
 	</style>
 </div>
+<script>
+</script>
 <!-- END: main -->

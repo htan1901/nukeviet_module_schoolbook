@@ -46,11 +46,15 @@ $getAllSubjectByClass = "SELECT * FROM " .
 
 $_listClass = $db->query($getAllSubjectByClass)->fetchAll();
 
+$num = 0;
 if (!empty($_listClass)) {
     foreach ($_listClass as $row) {
+        $xtpl->assign("ROW_NUM", "row_".$num);
         $xtpl->assign("subject", $row);
         // die($row);
+        $xtpl->assign("check", $row['trang_thai']=='0'?"checked":"");
         $xtpl->parse('main.schedule.subject_loop');
+        $num++;
     }
     $xtpl->parse('main.schedule');
 }
