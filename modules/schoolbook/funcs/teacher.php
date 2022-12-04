@@ -14,9 +14,10 @@ if (!defined('NV_IS_MOD_SCHOOLBOOK')) die('Stop!!!');
 $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
 
+
+// bat lenh chuyen trang
 if($nv_Request->isset_request('lop', 'get')) {
-    // die($nv_Request->get_title('lop', 'get'));
-    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=class');
+    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=class&' . 'lop=' . $nv_Request->get_title('lop', 'get') . '&ma_lop=' . $nv_Request->get_title('ma_lop', 'get'));
 }
 
 // lay username tu session
@@ -47,10 +48,9 @@ $_emptyPage = true;
 
 // hien thi lop chu nhiem, neu co
 if (!empty($_mainClassData[0])) {
-    $xtpl->assign('KHOA', $_mainClassData[0]['nam_hoc']);
+    $xtpl->assign('MA_LOP', $_mainClassData[0]['ma_lop']);
     $xtpl->assign('TEN_LCN', $_mainClassData[0]['ten_lop']);
     $_class_link = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=class&';
-    $xtpl->assign('button_class_link', $_class_link);
     $xtpl->parse('main.main_class');
     $_emptyPage = false;
 }

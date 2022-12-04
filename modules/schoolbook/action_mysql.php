@@ -59,7 +59,7 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
     ngay_day date NOT NULL,
     tiet_bat_dau tinyint NOT NULL,
     bai_hoc varchar(200) NOT NULL,
-    nhan_xet varchar(55) NOT NULL,
+    nhan_xet varchar(200) NOT NULL,
     xep_loai tinyint NOT NULL,
     trang_thai bit NOT NULL,
     ma_giao_vien varchar(10) NOT NULL,

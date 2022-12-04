@@ -33,7 +33,7 @@
 			<label>Lớp chủ nhiệm</label><br>
 			<form action="{URL_ACTION}" method="get" style="margin: 0 10px 0 10px;">
 				<div style="display: inline; margin: 0 10px 0 10px;">
-					<input type="hidden" name="khoa" value="{KHOA}">
+					<input type="hidden" name="ma_lop" value="{MA_LOP}">
 					<input type="submit" name="lop" value="{TEN_LCN}" class="button main-class-button">
 				</div>
 			</form>

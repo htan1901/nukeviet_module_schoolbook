@@ -33,6 +33,28 @@ $xtpl->assign('VAITRO', ' ' . ($_SESSION['vai_tro'] == '0'? 'Giáo vụ':"Giáo 
 $xtpl->assign('TRUONG', ' ' . $_schoolName[0]['ten_truong']);
 $xtpl->assign('PHIEN', ' ' . $_SESSION['thoi_gian']);
 
+$_classId = $_GET['ma_lop'];
+$getClassByIdQuery = "SELECT * FROM " . NV_PREFIXLANG . '_' . $module_data . "_lop WHERE ma_lop = '" . $_classId . "'";
+$_className = $db->query($getClassByIdQuery)->fetchAll();
+
+$xtpl->assign("LOP", $_className[0]['ten_lop']);
+
+// lay tat ca cac mon hoc thuoc lop
+$getAllSubjectByClass = "SELECT * FROM " . 
+                        NV_PREFIXLANG . '_' . $module_data . "_kehoachbaiday k, " . NV_PREFIXLANG . '_' . $module_data . '_monhoc m, ' . NV_PREFIXLANG . '_' . $module_data . '_lop l ' .
+                        " WHERE k.ma_mon_hoc = m.ma_mon_hoc AND l.ma_lop = k.ma_lop AND k.ma_lop = '" . $_classId . "' ";
+
+$_listClass = $db->query($getAllSubjectByClass)->fetchAll();
+
+if (!empty($_listClass)) {
+    foreach ($_listClass as $row) {
+        $xtpl->assign("subject", $row);
+        // die($row);
+        $xtpl->parse('main.schedule.subject_loop');
+    }
+    $xtpl->parse('main.schedule');
+}
+
 //Chuyển qua khối main
 $xtpl->parse('main');
 $ifram = $nv_Request->get_int('ifram', 'get', 0);

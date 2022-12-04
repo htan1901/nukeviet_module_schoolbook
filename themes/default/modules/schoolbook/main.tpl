@@ -11,7 +11,7 @@
                 value="{USERNAME}">
             <br>
             <label>{LANG.password}: </label>
-            <input class="input-text" type="password" name="input_password" value="{PASSWORD}">
+            <input placeholder="Mật khẩu..." class="input-text" type="password" name="input_password" value="{PASSWORD}">
             <br>
             <input type="submit" name="login" id="loginbtn" value="{LANG.login}">
         </div>
