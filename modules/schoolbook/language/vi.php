@@ -31,7 +31,6 @@ $lang_module['register'] = 'Đăng kí';
 $lang_module['login'] = 'Đăng Nhập';
 $lang_module['password_confirm'] = 'Nhập lại mật khẩu';
 $lang_module['login_fail'] = 'Đăng nhập không thành công';
-$lang_module['name_game'] = 'Game giải đố  Ô Chữ';
 $lang_module['question'] = 'Câu hỏi';
 $lang_module['submit'] = 'Nộp';
 $lang_module['start'] = 'Bắt đầu';
@@ -56,3 +55,17 @@ $lang_module['load_answer_fail'] = 'Lỗi khi tải dữ liệu đáp án !';
 // Feedback
 $lang_module['answer_strong'] = 'Câu trả lời của bạn không chính xác :(';
 $lang_module['answer_best'] = 'Chúc mừng bạn đã vượt qua câu hỏi thứ ';
+
+// 
+
+// SCHOOLBOOK
+$lang_module['app_name'] = 'Ứng dụng quản lý sổ đầu bài';
+$lang_module['full_name'] = 'Tên giáo viên: ';
+$lang_module['school'] = 'Trường: ';
+$lang_module['role'] = 'Vai trò: ';
+$lang_module['timestamp'] = 'Phiên: ';
+$lang_module['id'] = 'Mã số: ';
+$lang_module['class'] = 'Lớp: ';
+$lang_module['school_year'] = 'Niên khóa: ';
+$lang_module['empty_responsible'] = 'BẠN KHÔNG PHỤ TRÁCH LỚP NÀO';
+$lang_module['responsible'] = 'DANH SÁCH LỚP PHỤ TRÁCH';

@@ -35,8 +35,17 @@ if ($nv_Request->isset_request('login', 'post')) {
         if (session_id() == '') {
             session_start();
         }
+        
+        $getTeacherDataQuery = "SELECT gv.ma_giao_vien ,gv.ho_ten, tr.ten_truong, tk.vai_tro, tr.ma_truong FROM " .
+                                NV_PREFIXLANG . '_' . $module_data . "_taikhoan tk, " . NV_PREFIXLANG . "_" . $module_data . "_giaovien gv, " . NV_PREFIXLANG . "_" . $module_data . "_truong tr " .
+                                "WHERE tk.ma_giao_vien = gv.ma_giao_vien AND gv.ma_truong = tr.ma_truong AND tk.ten_dang_nhap = '" . $input_username . "' ";
+        $_teacherData = $db->query($getTeacherDataQuery)->fetchAll();
+
         $_SESSION['id'] = $_row[0]['id'].'';
         $_SESSION['ten_dang_nhap'] = $_row[0]['ten_dang_nhap'].'';
+        $_SESSION['ma_giao_vien'] = $_teacherData[0]['ma_giao_vien'];
+        $_SESSION['ma_truong'] = $_teacherData[0]['ma_truong'];
+        $_SESSION['vai_tro'] = $_teacherData[0]['vai_tro'];
         $_SESSION['thoi_gian'] = '' . date("H:i d/m/Y");
 
         // chuyen huong sang trang giao vien

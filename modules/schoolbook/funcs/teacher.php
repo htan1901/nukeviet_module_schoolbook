@@ -14,46 +14,79 @@ if (!defined('NV_IS_MOD_SCHOOLBOOK')) die('Stop!!!');
 $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
 
+if($nv_Request->isset_request('lop', 'get')) {
+    // die($nv_Request->get_title('lop', 'get'));
+    nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=class');
+}
 
 // lay username tu session
 $username = $_SESSION['ten_dang_nhap'];
 
 // lay du lieu cua giao vien
-$getTeacherDataQuery = "SELECT gv.ma_giao_vien ,gv.ho_ten, tr.ten_truong, tk.vai_tro, tr.ma_truong FROM " .
-                    NV_PREFIXLANG . '_' . $module_data . "_taikhoan tk, " . NV_PREFIXLANG . "_" . $module_data . "_giaovien gv, " . NV_PREFIXLANG . "_" . $module_data . "_truong tr " .
-                    "WHERE tk.ma_giao_vien = gv.ma_giao_vien AND gv.ma_truong = tr.ma_truong AND tk.ten_dang_nhap = '" . $username . "' ";
-$_teacherData = $db->query($getTeacherDataQuery)->fetchAll();
+$getSchoolNameQuery = "SELECT ten_truong FROM " .
+                        NV_PREFIXLANG . '_' . $module_data . "_truong " .
+                        "WHERE ma_truong = '" . $_SESSION['ma_truong'] . "' ";
+$_schoolName = $db->query($getSchoolNameQuery)->fetchAll();
+
+$getTeacherNameQuery = "SELECT ho_ten FROM " .
+                    NV_PREFIXLANG . '_' . $module_data . "_giaovien " .
+                    "WHERE ma_giao_vien = '" . $_SESSION['ma_giao_vien'] . "' ";
+$_teacherName = $db->query($getTeacherNameQuery)->fetchAll();
 
 // gan gia tri vao teacher.tpl
-$xtpl->assign('HOTEN', ' ' . $_teacherData[0]['ho_ten']);
-$xtpl->assign('VAITRO', ' ' . ($_teacherData[0]['vai_tro'] == '0'? 'Giáo vụ':"Giáo viên"));
-$xtpl->assign('TRUONG', ' ' . $_teacherData[0]['ten_truong']);
+$xtpl->assign('HOTEN', ' ' . $_teacherName[0]['ho_ten']);
+$xtpl->assign('VAITRO', ' ' . ($_SESSION['vai_tro'] == '0'? 'Giáo vụ':"Giáo viên"));
+$xtpl->assign('TRUONG', ' ' . $_schoolName[0]['ten_truong']);
 $xtpl->assign('PHIEN', ' ' . $_SESSION['thoi_gian']);
 
 // lay lop chu nhiem
-$getMainClassQuery = "SELECT * FROM " . NV_PREFIXLANG . '_' . $module_data . "_lop WHERE ma_gvcn = '" . $_teacherData[0]['ma_giao_vien'] . "'";
+$getMainClassQuery = "SELECT * FROM " . NV_PREFIXLANG . '_' . $module_data . "_lop WHERE ma_gvcn = '" . $_SESSION['ma_giao_vien'] . "'";
 $_mainClassData = $db->query($getMainClassQuery)->fetchAll();
+
+$_emptyPage = true;
 
 // hien thi lop chu nhiem, neu co
 if (!empty($_mainClassData[0])) {
+    $xtpl->assign('KHOA', $_mainClassData[0]['nam_hoc']);
     $xtpl->assign('TEN_LCN', $_mainClassData[0]['ten_lop']);
+    $_class_link = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name. '&amp;' . NV_OP_VARIABLE . '=class&';
+    $xtpl->assign('button_class_link', $_class_link);
     $xtpl->parse('main.main_class');
+    $_emptyPage = false;
+}
+
+// lay danh sach lop giang day
+$getTeachingClassQuery = "SELECT l.ma_lop, l.ten_lop, l.nam_hoc FROM " . NV_PREFIXLANG . '_' . $module_data . "_kehoachbaiday k, " . NV_PREFIXLANG . '_' . $module_data . '_lop l ' . "WHERE k.ma_lop = l.ma_lop AND ma_giao_vien = '" . $_SESSION['ma_giao_vien'] . "'"; 
+$_teachingClassData = $db->query($getTeachingClassQuery)->fetchAll();
+
+if (!empty($_teachingClassData)) {
+    foreach($_teachingClassData as $_eachrow) {
+        $xtpl->assign("teaching_row", $_eachrow);
+        $xtpl->parse('main.teaching_class.teaching_loop');
+    }
+    $xtpl->parse('main.teaching_class');
+    $_emptyPage = false;
 }
 
 // lay tat ca lop thuoc truong
 $getAllClassInSchool = "SELECT * FROM " . 
                         NV_PREFIXLANG . '_' . $module_data . "_lop l, " . NV_PREFIXLANG . '_' . $module_data . "_giaovien g "
-                        . "WHERE g.ma_giao_vien = l.ma_gvcn AND g.ma_truong = '" . $_teacherData[0]['ma_truong'] . "'" ;
+                        . "WHERE g.ma_giao_vien = l.ma_gvcn AND g.ma_truong = '" . $_SESSION['ma_truong'] . "'" ;
 $_allClassData = $db->query($getAllClassInSchool)->fetchAll();
+
 // hien thi danh sach lop quan ly neu la giao vu
-if($_teacherData[0]['vai_tro'] == '0') {
+if($_SESSION['vai_tro'] == '0') {
     foreach($_allClassData as $_eachrow) {
-        $xtpl->assign("row", $_eachrow);
-        $xtpl->parse('main.manage_class.loop');
+        $xtpl->assign("manage_row", $_eachrow);
+        $xtpl->parse('main.manage_class.manage_loop');
     }
     $xtpl->parse('main.manage_class');
+    $_emptyPage = false;
 }
 
+if($_emptyPage) {
+    $xtpl->parse('main.empty');
+}
 
 //Chuyển qua khối main
 $xtpl->parse( 'main' );

@@ -55,11 +55,11 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('L006', '12A1', 12, '2021 - 2022', 'GV008');
 ");
 
-$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_kehoachbaiday (ma_lop, ma_mon_hoc, ngay_day, tiet_bat_dau, nhan_xet, xep_loai, trang_thai, ma_giao_vien) VALUES
-	('L001', 'MH001', 2022-11-12, 1, 'Lớp học tốt', 'A', 0, 'GV001'),
-	('L001', 'MH002', 2022-11-12, 2, 'Lớp học tốt nhưng tệ', 'B', 1, 'GV003'),
-	('L001', 'MH003', 2022-11-12, 3, 'Lớp không học, quậy', 'C', 0, 'GV004'),
-	('L001', 'MH004', 2022-11-12, 4, 'Lớp học ổn', 'A', 1, 'GV005');
+$db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_kehoachbaiday (ma_lop, ma_mon_hoc, ngay_day, tiet_bat_dau, bai_hoc, nhan_xet, xep_loai, trang_thai, ma_giao_vien) VALUES
+	('L001', 'MH001', '2022-11-12', 1, 'Bài 1', 'Lớp học tốt', 'A', 0, 'GV001'),
+	('L001', 'MH002', '2022-11-12', 2, 'Bài 2', 'Lớp học tốt nhưng tệ', 'B', 1, 'GV003'),
+	('L001', 'MH003', '2022-11-12', 3, 'Bài 6', 'Lớp không học, quậy', 'C', 0, 'GV004'),
+	('L001', 'MH004', '2022-11-12', 4, 'Bài 4', 'Lớp học ổn', 'A', 1, 'GV005');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_taikhoan (ten_dang_nhap, mat_khau, ma_giao_vien, vai_tro) VALUES
