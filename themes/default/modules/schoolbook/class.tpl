@@ -1,7 +1,6 @@
-<script src="{$NV_BASE_SITEURL}{$NV_ASSETS_DIR}/js/schoolbook.js">
-
-</script>
 <!-- BEGIN: main -->
+<link rel="stylesheet" href="{NV_BASE_SITEURL}themes/default/css/schoolbook_class.css">
+<script src="{NV_BASE_SITEURL}themes/default/js/schoolbook_class.js"></script>
 <div class="table-responsive" style="margin-bottom: 10%;background-color: azure;">
 	<div id="top">
 		<table style="width: 100%;">
@@ -26,146 +25,136 @@
 	</div>
 
 	<div style="text-align: center; width: 100%;">
-		<p> <b>{LANG.class}</b>{LOP}</p>
+		<p><b>{LANG.class}: </b>{LOP}</p>
+		<p><b>{LANG.gvcn}: </b>{TEN_GVCN}</p>
 		<br>
 	</div>
-	<table id="table_date" style="width: 100%; margin-top: 30px;">
-		<tr>
-			<td>
-				<select id="nam_hoc" style="text-align: center;">
-					<option value="" selected> Năm Học </option>
-					<option value="nam_2020-2021">2020-2021</option>
-					<option value="nam_2021-2022">2021-2022</option>
-					<option value="nam_2022-2023">2022-2023</option>
 
-				</select>
-			</td>
-			<td>
-				<select id="hoc_ki" style="text-align: center;">
-					<option value="" selected> Học Kì </option>
-					<option value="hoc_ki_1">1</option>
-					<option value="hoc_ki_2">2</option>
-				</select>
-			</td>
-			<td>
-				<select id="tuan" style="text-align: center;">
-					<option value="" selected> Tuần </option>
-					<option value="tuan_1">1</option>
-					<option value="tuan_2">2</option>
-					<option value="tuan_3">3</option>
-					<option value="tuan_4">4</option>
-				</select>
-			</td>
-		</tr>
-	</table>
-	<style>
-		#table_date {
-			border-collapse: collapse;
-			width: 100%;
-		}
+	<div class="functions-section">
+		<form action="get" class="filter-section" style="width: 60%;
+					height: 100%;
+					display: inline;
+					float: left;">
+			<select>
+				<option value="" selected disabled> Chọn năm học</option>
+				<option value=""> Năm x </option>
+				<option value=""> Năm y </option>
+			</select>
 
-		#table_date td,
-		#table_date th {
-			border: 1px solid #ddd;
-			padding: 8px;
-		}
+			<select>
+				<option value="" selected disabled> Chọn học kỳ</option>
+				<option value=""> HK I </option>
+				<option value=""> HK II </option>
+			</select>
 
-		#table_date tr:nth-child(even) {
-			background-color: #f2f2f2;
-		}
+			<select>
+				<option value="" selected disabled> Chọn tuần</option>
+				<option value=""> Tuan x </option>
+				<option value=""> Tuan y </option>
+				<option value=""> Tuan z </option>
+			</select>
 
-		#table_date tr:hover {
-			background-color: #ddd;
-		}
+			<input type="submit">
+		</form>
 
-		#table_date th {
-			padding-top: 12px;
-			padding-bottom: 12px;
-			text-align: left;
-			background-color: #4CAF50;
-			color: white;
-		}
-	</style>
+		<form action="get" class="export-to-file" style="width: 30%;
+								height: 100%;
+								display: inline;
+								float: left;">
+			<!-- <select required="required">
+				<option value="Excel" selected disabled> Excel</option>
+				<option value="PDF"> PDF </option>
+			</select> -->
+			<!-- <i> 
+				<img src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-32.png" alt="" srcset=""> 
+				<input type="submit" name="type" value="Excel">
+			</i> -->
+			<button>
+				<img src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-microsoft-excel-2019-48.png" alt="export-to-excel"
+					style="width: 30px;">
+			</button>
+			Xuất Excel
+		</form>
+	</div>
+
+	<div style="width: 100%; margin: 10px 0 10px 0;">
+		<br>
+		<p class="title" style="font-weight: 600; text-align: center;">
+			<span>Tuần</span>
+		</p>
+	</div>
+
 	<!-- BEGIN: schedule-->
-	<div id="center" style="margin-top: 30px;">
-		<style>
-
-		</style>
-
-		<table style="width: 50%;">
-			<tr>
-				<td>
-					<input id="btn_edit" type="button" value="edit">
+	<div style="width: 100%">
+		<table id="so_dau_bai" style="text-align: center;width: 100%;">
+			<tr class="table_row">
+				<th class="table_col"> Thứ / Ngày</th>
+				<th class="table_col"> Đặc quyền </th>
+				<th class="table_col"> Tiết </th>
+				<th class="table_col"> Môn học </th>
+				<th class="table_col"> Bài học </th>
+				<th class="table_col"> Nhận xét</th>
+				<th class="table_col"> Đánh giá </th>
+				<th class="table_col"> Ký tên </i></th>
+				<th class="table_col" {hidden}>{LANG.status}</th>
+			</tr>
+			<!-- BEGIN: subject_loop-->
+			<tr class="table_row">
+				<td class="table_col">Thứ.../{subject.ngay_day}</td>
+				<td class="table_col">
+					<button title="edit" class="edit-btn" {edit_button_id}><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-32.png" alt=""
+							style="width: 100%; height: 100%;"></button>
+					<button title="cancel" class="cancel-btn"><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-cancel-48.png"
+							style="width: 100%; height: 100%;" /></button>
 				</td>
-				<td>
-					<input id="btn_save" type="button" value="save">
+				<td class="table_col">{subject.tiet_bat_dau}</td>
+				<td class="table_col" >{subject.ten_mon_hoc}</td>
+				<td class="table_col">
+					<textarea readonly {subject_unit_id}>{subject.bai_hoc}</textarea>
 				</td>
-				<td>
-					<input id="btn_delete" type="button" value="delete">
+				<td class="table_col">
+					<textarea readonly {subject_evaluate_id}>{subject.nhan_xet}</textarea>
 				</td>
-				<td>
-					<input id="btn_cancel" type="button" value="cancel">
+				<td class="table_col">
+					<input readonly type="number" min="0" max="10" style="text-align: center">
+				</td>
+				<td class="table_col">{subject.ho_ten}</td>
+				<td class="table_col" {hidden}>
+					<input type="checkbox" name="trang_thai" {check}>
 				</td>
 			</tr>
+			<!-- END: subject_loop-->
 		</table>
-
-		<div>
-			<table id="so_dau_bai" style="text-align: center;width: 100%;border: 2px solid black; margin: 10px 0 0 10px;">
-				<tr class="table_row">
-					<th class="table_col">Ngày dạy</th>
-					<th class="table_col">Tiết</th>
-					<th class="table_col">Tên môn học</th>
-					<th class="table_col">Bài học</th>
-					<th class="table_col">Nhận xét</th>
-					<th class="table_col">Xếp loại</i></th>
-					<th class="table_col">Trạng Thái</th>
-				</tr>
-				<!-- BEGIN: subject_loop-->
-				<tr class="table_row" id="{ROW_NUM}">
-					<td class="table_col">{subject.ngay_day}</td>
-					<td class="table_col">{subject.tiet_bat_dau}</td>
-					<td class="table_col">{subject.ten_mon_hoc}</td>
-					<td class="table_col">{subject.bai_hoc}</td>
-					<td class="table_col">{subject.nhan_xet}</td>
-					<td class="table_col">{subject.xep_loai}</td>
-					<td class="table_col">
-						<input type="checkbox" name="trang_thai" {check}>
-					</td>
-				</tr>
-				<!-- END: subject_loop-->
-			</table>
-		</div>
 	</div>
-	<!-- END: schedule-->
-	<style>
-		#so_dau_bai {
-			border-collapse: collapse;
-			width: 80%;
-		}
-
-		#so_dau_bai td,
-		#so_dau_bai th {
-			border: 1px solid #ddd;
-			padding: 8px;
-		}
-
-		#so_dau_bai tr {
-			text-align: left;
-		}
-
-		#so_dau_bai tr:hover {
-			background-color: #ddd;
-		}
-
-		#so_dau_bai th {
-			padding-top: 12px;
-			padding-bottom: 12px;
-			text-align: center;
-			background-color: #4CAF50;
-			color: white;
-		}
-	</style>
 </div>
-<script>
-</script>
+<style>
+	textarea {
+		resize: none;
+		background-color: transparent;
+		border: none;
+
+
+		/* 
+			border: 2px solid #ccc;
+			border-radius: 4px;
+			background-color: #f8f8f8;
+			resize: none; */
+	}
+
+	button {
+		width: 40px;
+		height: 30px;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+	}
+
+	button:hover {
+		opacity: 0.5;
+	}
+</style>
+<!-- END: schedule-->
+</div>
 <!-- END: main -->

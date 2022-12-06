@@ -56,16 +56,25 @@ $lang_module['load_answer_fail'] = 'Lỗi khi tải dữ liệu đáp án !';
 $lang_module['answer_strong'] = 'Câu trả lời của bạn không chính xác :(';
 $lang_module['answer_best'] = 'Chúc mừng bạn đã vượt qua câu hỏi thứ ';
 
-// 
-
 // SCHOOLBOOK
 $lang_module['app_name'] = 'Ứng dụng quản lý sổ đầu bài';
-$lang_module['full_name'] = 'Tên giáo viên: ';
-$lang_module['school'] = 'Trường: ';
-$lang_module['role'] = 'Vai trò: ';
-$lang_module['timestamp'] = 'Phiên đăng nhập: ';
-$lang_module['id'] = 'Mã số: ';
-$lang_module['class'] = 'Lớp: ';
-$lang_module['school_year'] = 'Niên khóa: ';
-$lang_module['empty_responsible'] = 'BẠN KHÔNG PHỤ TRÁCH LỚP NÀO';
-$lang_module['responsible'] = 'DANH SÁCH LỚP PHỤ TRÁCH';
+$lang_module['full_name'] = 'Tên giáo viên';
+$lang_module['school'] = 'Trường';
+$lang_module['role'] = 'Vai trò';
+$lang_module['timestamp'] = 'Phiên đăng nhập';
+$lang_module['id'] = 'Mã số';
+$lang_module['class'] = 'Lớp';
+$lang_module['school_year'] = 'Niên khóa';
+$lang_module['empty_responsible_title'] = 'BẠN KHÔNG PHỤ TRÁCH LỚP NÀO';
+$lang_module['responsible_title'] = 'DANH SÁCH LỚP PHỤ TRÁCH';
+$lang_module['main_class'] = 'Lớp chủ nhiệm';
+$lang_module['teaching_class'] = 'Lớp giảng dạy';
+$lang_module['manage_class'] = 'Lớp quản lý';
+$lang_module['evaluation'] = 'Đánh giá';
+$lang_module['status'] = 'Trạng thái';
+$lang_module['day_choose'] = 'Chọn ngày';
+$lang_module['subject_choose'] = 'Chọn môn học';
+$lang_module['privilege'] = 'Đặc quyền';
+$lang_module['gvcn'] = 'Tên GVCN';
+
+

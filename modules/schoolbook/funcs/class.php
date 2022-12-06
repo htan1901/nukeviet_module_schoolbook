@@ -27,7 +27,7 @@ $getTeacherNameQuery = "SELECT ho_ten FROM " .
                     "WHERE ma_giao_vien = '" . $_SESSION['ma_giao_vien'] . "' ";
 $_teacherName = $db->query($getTeacherNameQuery)->fetchAll();
 
-// gan gia tri vao teacher.tpl
+// gan gia tri vao teacher section
 $xtpl->assign('HOTEN', ' ' . $_teacherName[0]['ho_ten']);
 $xtpl->assign('VAITRO', ' ' . ($_SESSION['vai_tro'] == '0'? 'Giáo vụ':"Giáo viên"));
 $xtpl->assign('TRUONG', ' ' . $_schoolName[0]['ten_truong']);
@@ -39,20 +39,29 @@ $_className = $db->query($getClassByIdQuery)->fetchAll();
 
 $xtpl->assign("LOP", $_className[0]['ten_lop']);
 
-// lay tat ca cac mon hoc thuoc lop
-$getAllSubjectByClass = "SELECT * FROM " . 
-                        NV_PREFIXLANG . '_' . $module_data . "_kehoachbaiday k, " . NV_PREFIXLANG . '_' . $module_data . '_monhoc m, ' . NV_PREFIXLANG . '_' . $module_data . '_lop l ' .
-                        " WHERE k.ma_mon_hoc = m.ma_mon_hoc AND l.ma_lop = k.ma_lop AND k.ma_lop = '" . $_classId . "' ";
+$getMainTeacherQuery = "SELECT * FROM " . NV_PREFIXLANG . '_' . $module_data . "_lop l, " . NV_PREFIXLANG . '_' . $module_data . '_giaovien g ' .
+                        "WHERE l.ma_gvcn = g.ma_giao_vien AND l.ma_lop = '" . $_classId . "' ";
+$_mainTeacher = $db->query($getMainTeacherQuery)->fetchAll();
 
-$_listClass = $db->query($getAllSubjectByClass)->fetchAll();
+$xtpl->assign("TEN_GVCN", $_mainTeacher[0]['ho_ten']);
+
+// lay tat ca cac mon hoc thuoc lop
+$getAllSubjectsByClassQuery = "SELECT * FROM " . 
+                        NV_PREFIXLANG . '_' . $module_data . "_kehoachbaiday k, " . NV_PREFIXLANG . '_' . $module_data . '_monhoc m, ' . NV_PREFIXLANG . '_' . $module_data . '_lop l, ' . NV_PREFIXLANG . '_' . $module_data . '_giaovien g '.
+                        " WHERE k.ma_mon_hoc = m.ma_mon_hoc AND l.ma_lop = k.ma_lop AND k.ma_giao_vien = g.ma_giao_vien AND k.ma_lop = '" . $_classId . "' ";
+
+$_listSubjectsByClass = $db->query($getAllSubjectsByClassQuery)->fetchAll();
 
 $num = 0;
-if (!empty($_listClass)) {
-    foreach ($_listClass as $row) {
-        $xtpl->assign("ROW_NUM", "row_".$num);
+if (!empty($_listSubjectsByClass)) {
+    foreach ($_listSubjectsByClass as $row) {
+        $xtpl->assign("edit_button_id", 'id="edit_btn_'.$num.'"');
+        $xtpl->assign("subjet_unit_id", 'id="subject_unit_'.$num.'"');
+        $xtpl->assign("subject_evaluate_id", 'id="subject_evaluate_'.$num.'"');
         $xtpl->assign("subject", $row);
         // die($row);
         $xtpl->assign("check", $row['trang_thai']=='0'?"checked":"");
+        $xtpl->assign("hidden", $_SESSION['vai_tro'] == '1'? "hidden":"");
         $xtpl->parse('main.schedule.subject_loop');
         $num++;
     }

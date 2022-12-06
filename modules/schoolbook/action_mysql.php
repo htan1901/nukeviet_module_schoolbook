@@ -54,27 +54,27 @@ $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_
 ) ENGINE=MyISAM";
 
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_kehoachbaiday (
-    ma_lop varchar(10) NOT NULL,
-    ma_mon_hoc varchar(10) NOT NULL,
-    ngay_day date NOT NULL,
-    tiet_bat_dau tinyint NOT NULL,
-    bai_hoc varchar(200) NOT NULL,
-    nhan_xet varchar(200) NOT NULL,
-    xep_loai tinyint NOT NULL,
-    trang_thai bit NOT NULL,
-    ma_giao_vien varchar(10) NOT NULL,
-    FOREIGN KEY (ma_lop) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_lop(ma_lop),
-    FOREIGN KEY (ma_mon_hoc) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_monhoc(ma_mon_hoc),
-    FOREIGN KEY (ma_giao_vien) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(ma_giao_vien),
-    PRIMARY KEY (ma_lop, ma_mon_hoc, ngay_day)
-  ) ENGINE=MyISAM";
+  ma_lop varchar(10) NOT NULL,
+  ma_mon_hoc varchar(10) NOT NULL,
+  ngay_day date NOT NULL,
+  tiet_bat_dau tinyint NOT NULL,
+  bai_hoc varchar(200) NOT NULL,
+  nhan_xet varchar(200) NOT NULL,
+  xep_loai tinyint NOT NULL,
+  trang_thai bit NOT NULL,
+  ma_giao_vien varchar(10) NOT NULL,
+  FOREIGN KEY (ma_lop) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_lop(ma_lop),
+  FOREIGN KEY (ma_mon_hoc) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_monhoc(ma_mon_hoc),
+  FOREIGN KEY (ma_giao_vien) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(ma_giao_vien),
+  PRIMARY KEY (ma_lop, ma_mon_hoc, ngay_day)
+) ENGINE=MyISAM";
  
 $sql_create_module[] = 'CREATE TABLE ' . $db_config['prefix'] . '_' . $lang . '_' . $module_data . "_taikhoan (
-    id smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-    ten_dang_nhap varchar(50) NOT NULL,
-    mat_khau varchar(100) NOT NULL,
-    ma_giao_vien varchar(10) NOT NULL,
-    vai_tro tinyint NOT NULL,
-    FOREIGN KEY (ma_giao_vien) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(ma_giao_vien),
-    PRIMARY KEY (id)
-  ) ENGINE=MyISAM";
+  id smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  ten_dang_nhap varchar(50) NOT NULL,
+  mat_khau varchar(100) NOT NULL,
+  ma_giao_vien varchar(10) NOT NULL,
+  vai_tro tinyint NOT NULL,
+  FOREIGN KEY (ma_giao_vien) REFERENCES " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giaovien(ma_giao_vien),
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";

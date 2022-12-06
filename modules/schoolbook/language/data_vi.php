@@ -26,7 +26,9 @@ $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_d
 	('MH005', 'Thể dục'),
 	('MH006', 'Tiếng Anh'),
 	('MH007', 'Tin học'),
-	('MH008', 'Ngữ văn');
+	('MH008', 'Địa lý'),
+	('MH009', 'Giáo dục công dân'),
+	('MH012', 'Ngữ văn');
 ");
 
 $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_truong (ma_truong, ten_truong) VALUES
