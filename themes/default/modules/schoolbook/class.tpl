@@ -1,6 +1,5 @@
 <!-- BEGIN: main -->
 <link rel="stylesheet" href="{NV_BASE_SITEURL}themes/default/css/schoolbook_class.css">
-<script src="{NV_BASE_SITEURL}themes/default/js/schoolbook_class.js"></script>
 <div class="table-responsive" style="margin-bottom: 10%;background-color: azure;">
 	<div id="top">
 		<table style="width: 100%;">
@@ -80,7 +79,7 @@
 	<div style="width: 100%; margin: 10px 0 10px 0;">
 		<br>
 		<p class="title" style="font-weight: 600; text-align: center;">
-			<span>Tuần</span>
+			<br><span>Tuần</span>
 		</p>
 	</div>
 
@@ -100,29 +99,44 @@
 			</tr>
 			<!-- BEGIN: subject_loop-->
 			<tr class="table_row">
+
+				<td hidden>
+					<span class="row_id">{subject.ma_mon_hoc}</span>
+				</td>
 				<td class="table_col">Thứ.../{subject.ngay_day}</td>
 				<td class="table_col">
-					<button title="edit" class="edit-btn" {edit_button_id}><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-32.png" alt=""
-							style="width: 100%; height: 100%;"></button>
-					<button title="cancel" class="cancel-btn"><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-cancel-48.png"
-							style="width: 100%; height: 100%;" /></button>
+					<button title="edit" class="button_save" onclick="save({num})" hidden><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-save-48.png" alt=""
+							style="width: 100%; height: 100%;">
+					</button>
+					<button title="cancel" class="button_cancel" onclick="cancel({num})" hidden><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-cancel-48.png" alt=""
+							style="width: 100%; height: 100%;">
+					</button>
+					<button title="edit" class="button_edit" onclick="edit({num})"><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-48.png" alt=""
+							style="width: 100%; height: 100%;">
+					</button>
+					<button title="edit" class="button_remove" onclick=""><img
+							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-remove-48.png" alt=""
+							style="width: 100%; height: 100%;">
+					</button>
 				</td>
 				<td class="table_col">{subject.tiet_bat_dau}</td>
-				<td class="table_col" >{subject.ten_mon_hoc}</td>
+				<td class="table_col">{subject.ten_mon_hoc}</td>
 				<td class="table_col">
-					<textarea readonly {subject_unit_id}>{subject.bai_hoc}</textarea>
+					<textarea readonly class="textarea_baihoc">{subject.bai_hoc}</textarea>
 				</td>
 				<td class="table_col">
-					<textarea readonly {subject_evaluate_id}>{subject.nhan_xet}</textarea>
+					<textarea readonly class="textarea_nhanxet">{subject.nhan_xet}</textarea>
 				</td>
 				<td class="table_col">
-					<input readonly type="number" min="0" max="10" style="text-align: center">
+					<input readonly type="number" min="0" max="10" style="text-align: center" class="number_xeploai"
+						value="{subject.xep_loai}">
 				</td>
 				<td class="table_col">{subject.ho_ten}</td>
 				<td class="table_col" {hidden}>
-					<input type="checkbox" name="trang_thai" {check}>
+					<input type="checkbox" name="trang_thai" {check} class="input_trangthai">
 				</td>
 			</tr>
 			<!-- END: subject_loop-->
@@ -130,17 +144,12 @@
 	</div>
 </div>
 <style>
-	textarea {
+	.textarea_baihoc,
+	.textarea_nhanxet,
+	.number_xeploai {
 		resize: none;
 		background-color: transparent;
 		border: none;
-
-
-		/* 
-			border: 2px solid #ccc;
-			border-radius: 4px;
-			background-color: #f8f8f8;
-			resize: none; */
 	}
 
 	button {
@@ -156,5 +165,106 @@
 	}
 </style>
 <!-- END: schedule-->
+<!-- BEGIN: script -->
+<script>
+	var editButtons = document.getElementsByClassName('button_edit');
+	var cancelButtons = document.getElementsByClassName('button_cancel');
+	var saveButtons = document.getElementsByClassName('button_save');
+	var removeButtons = document.getElementsByClassName('button_remove');
+	var textAreaBaiHocs = document.getElementsByClassName('textarea_baihoc');
+	var rowIDs = document.getElementsByClassName('row_id');
+	var textAreaNhanXets = document.getElementsByClassName('textarea_nhanxet');
+	var numberXepLoais = document.getElementsByClassName('number_xeploai');
+	var inputTrangThais = document.getElementsByClassName('input_trangthai');
+
+	function edit(index) {
+
+		// kiem tra xem row co duoc phep sua hay khong
+		if (!inputTrangThais[index].checked) {
+			window.alert("Bạn không có quyền sửa nội dung dòng này!");
+			return;
+		}
+
+		changeToEditState(index);
+	}
+
+	function save(index) {
+		if(numberXepLoais[index].value == "") {
+			window.alert("Điểm số rỗng!");
+			return;
+		}
+
+		const url = "/nukviet/schoolbook/class/?";
+		const data = {
+			"ma_mon_hoc": rowIDs[index].innerHTML,
+			"bai_hoc": textAreaBaiHocs[index].innerHTML,
+			"nhan_xet": textAreaNhanXets[index].innerHTML,
+			"xep_loai": numberXepLoais[index].value,
+		};
+
+		$.post(url, data, function(){
+			console.log(data);
+		});
+	}
+
+	function cancel(index) {
+		if (confirm("Bạn muốn hủy thay đổi!")) {
+			changeToNormalState(index);
+			return;
+		}
+	}
+
+	function changeToNormalState(index) {
+		// cho phep sua cac truong duoc sua
+		textAreaBaiHocs[index].readOnly = true;
+		textAreaNhanXets[index].readOnly = true;
+		numberXepLoais[index].readOnly = true;
+
+		// thay doi css cho de nhin
+		textAreaBaiHocs[index].style.backgroundColor = 'transparent';
+		textAreaBaiHocs[index].style.border = 'none';
+
+		textAreaNhanXets[index].style.backgroundColor = 'transparent';
+		textAreaNhanXets[index].style.border = 'none';
+
+		numberXepLoais[index].style.backgroundColor = 'transparent';
+		numberXepLoais[index].style.border = 'none';
+
+		// hien thi nut huy va luu
+		cancelButtons[index].hidden = true;
+		saveButtons[index].hidden = true;
+		editButtons[index].hidden = false;
+		removeButtons[index].hidden = false;
+	}
+
+	function changeToEditState(index) {
+		// cho phep sua cac truong duoc sua
+		textAreaBaiHocs[index].readOnly = false;
+		textAreaNhanXets[index].readOnly = false;
+		numberXepLoais[index].readOnly = false;
+
+		textAreaBaiHocs[index].focus();
+
+		// thay doi css cho de nhin
+		textAreaBaiHocs[index].style.backgroundColor = '#fff';
+		textAreaBaiHocs[index].style.border = '2px solid #ccc';
+		textAreaBaiHocs[index].style.borderRadius = '4px';
+
+		textAreaNhanXets[index].style.backgroundColor = '#fff';
+		textAreaNhanXets[index].style.border = '2px solid #ccc';
+		textAreaNhanXets[index].style.borderRadius = '4px';
+
+		numberXepLoais[index].style.backgroundColor = '#fff';
+		numberXepLoais[index].style.border = '2px solid #ccc';
+		numberXepLoais[index].style.borderRadius = '4px';
+
+		// hien thi nut huy va luu
+		cancelButtons[index].hidden = false;
+		saveButtons[index].hidden = false;
+		editButtons[index].hidden = true
+		removeButtons[index].hidden = true;
+	}
+</script>
+<!-- END: script -->
 </div>
 <!-- END: main -->

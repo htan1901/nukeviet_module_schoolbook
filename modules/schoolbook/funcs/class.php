@@ -16,6 +16,10 @@ $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['tem
 //Truyền tham số sang view
 $xtpl->assign( 'LANG', $lang_module );
 
+if ($nv_Request->isset_request("ma_mon_hoc", 'post')) {
+    die("change data please");
+}
+
 // lay du lieu cua giao vien
 $getSchoolNameQuery = "SELECT ten_truong FROM " .
                         NV_PREFIXLANG . '_' . $module_data . "_truong " .
@@ -55,10 +59,8 @@ $_listSubjectsByClass = $db->query($getAllSubjectsByClassQuery)->fetchAll();
 $num = 0;
 if (!empty($_listSubjectsByClass)) {
     foreach ($_listSubjectsByClass as $row) {
-        $xtpl->assign("edit_button_id", 'id="edit_btn_'.$num.'"');
-        $xtpl->assign("subjet_unit_id", 'id="subject_unit_'.$num.'"');
-        $xtpl->assign("subject_evaluate_id", 'id="subject_evaluate_'.$num.'"');
         $xtpl->assign("subject", $row);
+        $xtpl->assign("num", $num);
         // die($row);
         $xtpl->assign("check", $row['trang_thai']=='0'?"checked":"");
         $xtpl->assign("hidden", $_SESSION['vai_tro'] == '1'? "hidden":"");
@@ -69,6 +71,7 @@ if (!empty($_listSubjectsByClass)) {
 }
 
 //Chuyển qua khối main
+$xtpl->parse('main.script');
 $xtpl->parse('main');
 $ifram = $nv_Request->get_int('ifram', 'get', 0);
 $contents = $xtpl->text('main');

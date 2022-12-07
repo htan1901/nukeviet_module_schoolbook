@@ -1,25 +1,16 @@
 
-var editButtons = document.getElementsByClassName('edit-btn');
-if (editButtons != null) {
-	for (let i = 0; i < editButtons.length; i++) {
-		const editButton = editButtons[i];
-		editButton.addEventListener("click", edit(editButton.id));
-	}
-}
+var editButtons = document.getElementsByClassName('button_edit');
+var cancelButtons = document.getElementsByClassName('button-cancel');
+var textAreaBaiHoc = document.getElementsByClassName('textarea_baihoc');
+var textAreaNhanXet = document.getElementsByClassName('textarea_nhanxet');
+var numberDiem = document.getElementsByClassName('number_point');
 
-var cancelButtons = document.getElementsByClassName('cancel-btn');
-if (cancelButtons != null) {
-	for (let i = 0; i < cancelButtons.length; i++) {
-		const cancelButton = cancelButtons[i];
-		cancelButton.addEventListener("click", cancel);
-	}
-}
+function edit(index) {
+	textAreaBaiHoc[index].readOnly = false;
+	textAreaNhanXet[index].readOnly = false;
+	numberDiem[index].readOnly = false;
 
-function edit(button_id) {
-	const lastIndex = button_id.lastIndexOf('_');
-	const rowNumber = button_id.substr(lastIndex);
-	const textArea = document.getElementById('subject_unit_'.concat(rowNumber));
-	window.alert(textArea.innerText);
+	textAreaBaiHoc[index].focus();
 }
 
 function cancel() {
