@@ -30,7 +30,8 @@
 	</div>
 
 	<div class="functions-section">
-		<form action="get" class="filter-section" style="width: 60%;
+		<form action="get" class="filter-section" 
+		style="width: 60%;
 					height: 100%;
 					display: inline;
 					float: left;">
@@ -60,15 +61,7 @@
 								height: 100%;
 								display: inline;
 								float: left;">
-			<!-- <select required="required">
-				<option value="Excel" selected disabled> Excel</option>
-				<option value="PDF"> PDF </option>
-			</select> -->
-			<!-- <i> 
-				<img src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-32.png" alt="" srcset=""> 
-				<input type="submit" name="type" value="Excel">
-			</i> -->
-			<button>
+						<button>
 				<img src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-microsoft-excel-2019-48.png" alt="export-to-excel"
 					style="width: 30px;">
 			</button>
@@ -98,69 +91,87 @@
 				<th class="table_col" {hidden}>{LANG.status}</th>
 			</tr>
 			<!-- BEGIN: subject_loop-->
-			<tr class="table_row">
-
-				<td hidden>
-					<span class="row_id">{subject.ma_mon_hoc}</span>
-				</td>
-				<td class="table_col">Thứ.../{subject.ngay_day}</td>
-				<td class="table_col">
-					<button title="edit" class="button_save" onclick="save({num})" hidden><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-save-48.png" alt=""
-							style="width: 100%; height: 100%;">
-					</button>
-					<button title="cancel" class="button_cancel" onclick="cancel({num})" hidden><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-cancel-48.png" alt=""
-							style="width: 100%; height: 100%;">
-					</button>
-					<button title="edit" class="button_edit" onclick="edit({num})"><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-edit-48.png" alt=""
-							style="width: 100%; height: 100%;">
-					</button>
-					<button title="edit" class="button_remove" onclick=""><img
-							src="{NV_BASE_SITEURL}themes/default/images/icons/icons8-remove-48.png" alt=""
-							style="width: 100%; height: 100%;">
-					</button>
-				</td>
-				<td class="table_col">{subject.tiet_bat_dau}</td>
-				<td class="table_col">{subject.ten_mon_hoc}</td>
-				<td class="table_col">
-					<textarea readonly class="textarea_baihoc">{subject.bai_hoc}</textarea>
-				</td>
-				<td class="table_col">
-					<textarea readonly class="textarea_nhanxet">{subject.nhan_xet}</textarea>
-				</td>
-				<td class="table_col">
-					<input readonly type="number" min="0" max="10" style="text-align: center" class="number_xeploai"
-						value="{subject.xep_loai}">
-				</td>
-				<td class="table_col">{subject.ho_ten}</td>
-				<td class="table_col" {hidden}>
-					<input type="checkbox" name="trang_thai" {check} class="input_trangthai">
-				</td>
-			</tr>
+			<form action="{URL_ACTION}" method="post">
+				<tr class="table_row">
+					<td hidden>
+						<input name="ma_mon_hoc" class="row_id" value="{subject.ma_mon_hoc}">
+					</td>
+					<td class="table_col" style="width: 10%;">
+						<span>{day_of_week}</span> 
+						<br>
+						<input type="date" name="ngay_day" class="input_ngayday" value="{subject.ngay_day}" readonly>
+					</td>
+					<td class="table_col">
+						<button name="save" title="edit" class="button_save" hidden>
+							<img
+								src="{NV_BASE_SITEURL}themes/default/images/icons/check.png" alt=""
+								style="width: 100%; height: 100%;">
+						</button>
+						<button title="cancel" class="button_cancel" onclick="cancel({num})" hidden>
+							<img
+								src="{NV_BASE_SITEURL}themes/default/images/icons/multiply.png" alt=""
+								style="width: 100%; height: 100%;">
+						</button>
+						<span title="edit" class="button_edit span_button" onclick="edit({num})">
+							<img
+								src="{NV_BASE_SITEURL}themes/default/images/icons/edit.png" alt=""
+								style="width: 100%; height: 100%;">
+						</span>
+						<button title="edit" class="button_remove" onclick="">
+							<img
+								src="{NV_BASE_SITEURL}themes/default/images/icons/delete.png" alt=""
+								style="width: 100%; height: 100%;">
+						</button>
+					</td>
+					<td class="table_col">{subject.tiet_bat_dau}</td>
+					<td class="table_col">{subject.ten_mon_hoc}</td>
+					<td class="table_col">
+						<textarea name="textarea_baihoc" readonly class="textarea_baihoc">{subject.bai_hoc}</textarea>
+					</td>
+					<td class="table_col">
+						<textarea name="textarea_nhanxet" readonly class="textarea_nhanxet">{subject.nhan_xet}</textarea>
+					</td>
+					<td class="table_col">
+						<input name="number_xeploai" readonly type="number" min="0" max="10" style="text-align: center" class="number_xeploai"
+							value="{subject.xep_loai}">
+					</td>
+					<td class="table_col">{subject.ho_ten}</td>
+					<td class="table_col" {hidden}>
+						<input type="checkbox" name="trang_thai" {check} class="input_trangthai">
+					</td>
+				</tr>
+			</form>
 			<!-- END: subject_loop-->
 		</table>
 	</div>
 </div>
 <style>
+
 	.textarea_baihoc,
 	.textarea_nhanxet,
-	.number_xeploai {
+	.number_xeploai,
+	.input_ngayday {
 		resize: none;
 		background-color: transparent;
 		border: none;
 	}
 
-	button {
-		width: 40px;
-		height: 30px;
+	.input_ngayday {
+		width: 80%;
+	}
+
+	.span_button, button{
+		margin: 0 5px 0 5px;
+		padding: 0;
+		display: inline-block;
+		width: 25px;
+		height: 25px;
 		cursor: pointer;
 		background-color: transparent;
 		border: none;
 	}
 
-	button:hover {
+	span:hover, button:hover {
 		opacity: 0.5;
 	}
 </style>
@@ -186,25 +197,6 @@
 		}
 
 		changeToEditState(index);
-	}
-
-	function save(index) {
-		if(numberXepLoais[index].value == "") {
-			window.alert("Điểm số rỗng!");
-			return;
-		}
-
-		const url = "/nukviet/schoolbook/class/?";
-		const data = {
-			"ma_mon_hoc": rowIDs[index].innerHTML,
-			"bai_hoc": textAreaBaiHocs[index].innerHTML,
-			"nhan_xet": textAreaNhanXets[index].innerHTML,
-			"xep_loai": numberXepLoais[index].value,
-		};
-
-		$.post(url, data, function(){
-			console.log(data);
-		});
 	}
 
 	function cancel(index) {

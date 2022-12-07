@@ -2,9 +2,9 @@
 
 /**
  * @Project NUKEVIET 4.x
- * @Author SWINGP (http://swingp.com.vn)
- * @Copyright (C) 2022 SWINGP. All rights reserved
- * @License GNU/GPL version 2 or any later version
+ * @Author 4FT
+ * @Copyright (C) 2022 4FT. All rights reserved
+ * @License GNU/GPL version 3 or any later version
  * @Createdate Mon, 3 Wed 2022 21:00:00 GMT
  */
 
@@ -17,7 +17,7 @@ $module_version = array(
 		'virtual' => 1,
 		'version' => '4.0.29',
 		'date' => 'Mon, 3 Wed 2022 21:00:00 GMT',
-		'author' => 'SWINGP (swingp.com.vn)',
+		'author' => '4FT (4FT.com.vn)',
 		'uploads_dir' => array($module_name),
 		'note' => ''
 	);
